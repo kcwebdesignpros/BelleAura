@@ -1,12 +1,13 @@
 {
   "name": "belleaura-beauty-salon",
   "version": "1.0.0",
-  "description": "BelleAura Beauty Salon - Premium beauty services in Kansas City. Built for Vercel deployment.",
+  "description": "BelleAura Beauty Salon - Premium beauty services in Kansas City. Node.js + Express + EJS, deployable to Vercel (SSR) or Cloudflare Pages (pre-rendered static).",
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
     "dev": "nodemon app.js",
-    "build": "echo 'No build required - pure Node.js + EJS'"
+    "build": "node build-static.js",
+    "preview": "node preview-static.js"
   },
   "engines": {
     "node": ">=18.0.0"

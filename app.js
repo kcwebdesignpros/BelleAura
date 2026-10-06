@@ -22,7 +22,7 @@ const SITE_CONFIG = {
   name: 'BelleAura Beauty Salon',
   tagline: 'Beauty, Care, Confidence',
   description: 'Premium beauty salon in Kansas City offering hair styling, facials, nail care, makeup, spa treatments, and bridal packages. Book your appointment today.',
-  url: 'https://belleaura-salon.vercel.app',
+  url: process.env.SITE_URL || 'https://belleaura-salon.vercel.app',
   email: 'hello@belleaura.com',
   phone: '(816) 555-0123',
   address: '4820 JCT Country Club Road, Kansas City, MO 64112',
@@ -397,16 +397,6 @@ app.get('/terms', (req, res) => {
   });
 });
 
-// 404
-app.use((req, res) => {
-  res.status(404).render('404', {
-    title: 'Page Not Found | BelleAura Beauty Salon',
-    description: 'The page you are looking for could not be found.',
-    canonical: '/404',
-    pageClass: 'error'
-  });
-});
-
 // =============================================
 // SITEMAP.XML
 // =============================================
@@ -460,6 +450,20 @@ Allow: /
 Disallow: /admin/
 
 Sitemap: ${SITE_CONFIG.url}/sitemap.xml`);
+});
+
+// =============================================
+// 404 HANDLER — must be registered LAST, after
+// every real route (including /sitemap.xml and
+// /robots.txt), otherwise it shadows them.
+// =============================================
+app.use((req, res) => {
+  res.status(404).render('404', {
+    title: 'Page Not Found | BelleAura Beauty Salon',
+    description: 'The page you are looking for could not be found.',
+    canonical: '/404',
+    pageClass: 'error'
+  });
 });
 
 // =============================================

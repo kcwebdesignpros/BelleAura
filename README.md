@@ -11,19 +11,20 @@ A premium, SEO-optimized, page-speed-optimized Node.js web application for a bea
 5. [Quick Start](#quick-start)
 6. [Local Development](#local-development)
 7. [Deploy to Vercel](#deploy-to-vercel)
-8. [SEO Features](#seo-features)
-9. [Page Speed Optimization](#page-speed-optimization)
-10. [Pages Included](#pages-included)
-11. [Services](#services)
-12. [Customization Guide](#customization-guide)
-13. [Environment Variables](#environment-variables)
-14. [Troubleshooting](#troubleshooting)
+8. [Deploy to Cloudflare Pages](#deploy-to-cloudflare-pages)
+9. [SEO Features](#seo-features)
+10. [Page Speed Optimization](#page-speed-optimization)
+11. [Pages Included](#pages-included)
+12. [Services](#services)
+13. [Customization Guide](#customization-guide)
+14. [Environment Variables](#environment-variables)
+15. [Troubleshooting](#troubleshooting)
 
 ---
 
 ## Overview
 
-BelleAura is a full-featured beauty salon website targeting Kansas City, MO. It includes all necessary pages for a complete web presence, 6 detailed service pages, SEO optimization, and is ready for deployment to Vercel.
+BelleAura is a full-featured beauty salon website targeting Kansas City, MO. It includes all necessary pages for a complete web presence, 6 detailed service pages, SEO optimization, and is ready to deploy to **Vercel** (serverless SSR) or **Cloudflare Pages** (pre-rendered static).
 
 - **Location targeted:** Kansas City, Missouri
 - **No database required** - all content is stored in JSON/JS data structures
@@ -94,12 +95,16 @@ BelleAura is a full-featured beauty salon website targeting Kansas City, MO. It 
 
 ```
 belleaura/
-├── app.js                      # Main Express application
+├── app.js                      # Main Express application (routes + data)
+├── build-static.js             # Static site generator -> dist/  (Cloudflare build)
+├── preview-static.js           # Local preview server for dist/
 ├── package.json                # Dependencies and scripts
 ├── vercel.json                 # Vercel deployment config
+├── .nvmrc                      # Node version pin (20)
 ├── .env.example                # Environment variable template
 ├── .gitignore                  # Git ignore rules
-├── generate_images.py          # Placeholder image generator
+├── process_images.py           # Resizes AI-generated images into public/images
+├── generate_images.py          # Flat placeholder generator (opt-in, guarded)
 ├── README.md                   # This file
 │
 ├── views/                      # EJS templates
@@ -131,19 +136,23 @@ belleaura/
 │       ├── spa-treatments.ejs
 │       └── bridal-packages.ejs
 │
-├── public/                     # Static assets
+├── public/                     # Static assets (copied to dist/ at build)
 │   ├── css/
 │   │   └── style.css           # All styles (single file)
 │   ├── js/
 │   │   └── main.js             # All JavaScript (single file)
-│   ├── images/                 # All images (generated)
-│   ├── robots.txt              # Static fallback
-│   ├── sitemap.xml             # Static fallback
-│   ├── manifest.json           # PWA manifest
-│   └── favicon.svg             # Favicon
+│   ├── images/                 # Photos + brand assets (logo, favicons)
+│   ├── fonts/                  # Self-hosted fonts (if any)
+│   ├── _headers                # Cloudflare Pages headers
+│   └── manifest.json           # PWA manifest
 │
+├── dist/                       # Build output (generated, git-ignored)
 └── data/                       # (Reserved for future JSON data)
 ```
+
+> `sitemap.xml` and `robots.txt` are **not** stored in `public/`. They are generated
+> at request/build time from the `SITE_URL` environment variable, so the URLs are
+> always correct for whichever host you deploy to.
 
 ---
 
@@ -264,8 +273,103 @@ git push -u origin main
 1. In Vercel Dashboard > Settings > Domains
 2. Add your custom domain (e.g., `belleaura.com`)
 3. Update DNS records as instructed by Vercel
-4. Update `SITE_URL` in `app.js` and `.env` to your domain
-5. Update the `sitemap.xml` and `robots.txt` URLs
+4. Set the `SITE_URL` environment variable to your domain (e.g. `https://belleaura.com`)
+
+> `SITE_URL` drives the canonical tags, `sitemap.xml` and `robots.txt`. You no longer need to edit those files by hand — they are generated from this value.
+
+---
+
+## Deploy to Cloudflare Pages
+
+Cloudflare Pages serves **static files**, but this project renders pages on the server with Express + EJS. To bridge that, the project ships a **static site generator** (`build-static.js`) that pre-renders every route to plain HTML at build time.
+
+You do **not** need to change any code — Cloudflare just needs the right build settings.
+
+### Build settings (Cloudflare Pages dashboard)
+
+When you create the Pages project and connect the GitHub repo, enter:
+
+| Setting | Value |
+|---|---|
+| Framework preset | **None** |
+| Build command | `npm run build` |
+| Build output directory | `dist` |
+| Node version | `20` (already pinned via `.nvmrc`) |
+
+> ⚠️ If you leave the build command empty, Cloudflare will look for an existing static folder and fail with *"Could not detect a directory containing static files"*. The `npm run build` command is what creates `dist/`.
+
+### Required environment variable
+
+Add this under **Settings → Environment variables** (Production *and* Preview):
+
+| Name | Value |
+|---|---|
+| `SITE_URL` | `https://<your-project>.pages.dev` (or your custom domain) |
+
+`SITE_URL` sets the absolute URLs used in canonical tags, Open Graph tags, `sitemap.xml` and `robots.txt`. Without it, those will point at the fallback domain.
+
+### Method 1: Git integration (recommended)
+
+1. Go to **Cloudflare Dashboard → Workers & Pages → Create → Pages → Connect to Git**
+2. Select `kcwebdesignpros/BelleAura`
+3. Set the build command to `npm run build` and the output directory to `dist`
+4. Add the `SITE_URL` environment variable
+5. Click **Save and Deploy**
+
+Every push to `main` triggers a new build and deploy.
+
+### Method 2: Wrangler CLI
+
+```bash
+# Install the CLI
+npm install -g wrangler
+
+# Build the static output
+SITE_URL="https://belleaura.pages.dev" npm run build
+
+# Deploy the dist/ folder
+wrangler pages deploy dist --project-name=belleaura
+```
+
+### Verify the static build locally
+
+```bash
+npm run build     # pre-renders every page into dist/
+npm run preview   # serves dist/ at http://localhost:4173
+```
+
+`npm run preview` mimics Cloudflare Pages routing — clean URLs (`/about` → `about/index.html`) and a `404.html` fallback — so you can confirm the build before deploying.
+
+### What gets generated
+
+```
+dist/
+├── index.html                    # /
+├── about/index.html              # /about
+├── services/index.html           # /services
+├── services/hair-styling/index.html   # /services/hair-styling  (+ 5 more)
+├── gallery|reviews|contact|team|pricing|faq|blog|book/index.html
+├── privacy-policy/index.html
+├── terms/index.html
+├── 404.html                      # not-found fallback
+├── sitemap.xml                   # generated from SITE_URL
+├── robots.txt                    # generated from SITE_URL
+├── _headers                      # Cloudflare security + cache headers
+└── css/ js/ images/ fonts/ manifest.json   (copied from public/)
+```
+
+### Custom domain on Cloudflare
+
+1. **Workers & Pages → your project → Custom domains → Set up a domain**
+2. Add e.g. `belleaura.com` and follow the DNS instructions
+3. Update the `SITE_URL` environment variable to the custom domain
+4. Redeploy so canonical tags and the sitemap pick up the new URL
+
+### Notes
+
+- The Express server (`npm start`) is still used for local development. Cloudflare only runs `npm run build`.
+- `dist/` is git-ignored — it is a build artifact, not source.
+- Form submissions (`/contact`, `/book`) are client-side only in this build (no backend). To collect them on Cloudflare, wire the forms to a Pages Function or a third-party form service.
 
 ---
 
@@ -504,9 +608,16 @@ PORT=3001 npm start
 - Verify `app.js` exports the app: `module.exports = app;`
 
 ### Sitemap not updating
-- The dynamic sitemap is generated at `/sitemap.xml`
-- Static fallback is at `public/sitemap.xml`
-- Clear browser cache or check in incognito mode
+- `/sitemap.xml` is generated at runtime from the `SITE_URL` environment variable
+- There is no static `public/sitemap.xml` to keep in sync any more
+- On a static build, `sitemap.xml` and `robots.txt` are written into `dist/` by `npm run build`
+- If the URLs look wrong, `SITE_URL` is not set — set it and rebuild/redeploy
+
+### Cloudflare: "Could not detect a directory containing static files"
+- This project renders with Express, so Cloudflare needs a build step that produces static HTML
+- Set **Build command** = `npm run build` and **Build output directory** = `dist`
+- Do not leave the build command empty — that is what triggers this error
+- See [Deploy to Cloudflare Pages](#deploy-to-cloudflare-pages)
 
 ### Contact form not submitting
 - Forms use front-end validation only (no backend)
@@ -528,7 +639,7 @@ MIT License - feel free to use this project for your salon business.
 - **Fonts**: Cormorant Garamond & Inter (Google Fonts)
 - **Icons**: Custom SVG illustrations
 - **Framework**: Express.js
-- **Deployment**: Vercel
+- **Deployment**: Vercel (serverless SSR) · Cloudflare Pages (pre-rendered static)
 
 ---
 
