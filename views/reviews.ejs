@@ -1,0 +1,76 @@
+<!-- Page Hero -->
+<section class="page-hero">
+  <div class="container">
+    <span class="hero-eyebrow">What Clients Say</span>
+    <h1 class="page-title">Reviews & Testimonials</h1>
+    <p class="page-subtitle">Real stories from our valued Kansas City clients</p>
+  </div>
+</section>
+
+<!-- Reviews Section -->
+<section class="reviews-page-section section-padding">
+  <div class="container">
+    <div class="reviews-summary">
+      <div class="rating-overview">
+        <div class="rating-big">4.9</div>
+        <div class="rating-stars-big">★★★★★</div>
+        <div class="rating-count">Based on 127+ reviews</div>
+      </div>
+      <div class="rating-breakdown">
+        <div class="rating-bar">
+          <span>5 stars</span>
+          <div class="bar"><div class="fill" style="width: 92%"></div></div>
+          <span>92%</span>
+        </div>
+        <div class="rating-bar">
+          <span>4 stars</span>
+          <div class="bar"><div class="fill" style="width: 6%"></div></div>
+          <span>6%</span>
+        </div>
+        <div class="rating-bar">
+          <span>3 stars</span>
+          <div class="bar"><div class="fill" style="width: 1%"></div></div>
+          <span>1%</span>
+        </div>
+        <div class="rating-bar">
+          <span>2 stars</span>
+          <div class="bar"><div class="fill" style="width: 1%"></div></div>
+          <span>1%</span>
+        </div>
+        <div class="rating-bar">
+          <span>1 star</span>
+          <div class="bar"><div class="fill" style="width: 0%"></div></div>
+          <span>0%</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="reviews-list">
+      <% reviews.forEach(function(review) { %>
+        <div class="review-card-large">
+          <div class="review-header">
+            <div>
+              <div class="review-stars">
+                <% for (let i = 0; i < review.rating; i++) { %>
+                  <span class="star" aria-hidden="true">★</span>
+                <% } %>
+              </div>
+              <strong class="review-name"><%= review.name %></strong>
+            </div>
+            <span class="review-service-tag"><%= review.service %></span>
+          </div>
+          <p class="review-text"><%= review.text %></p>
+          <div class="review-meta">
+            <span class="review-location">📍 <%= review.location %></span>
+            <span class="review-date">Verified Client</span>
+          </div>
+        </div>
+      <% }); %>
+    </div>
+
+    <div class="text-center mt-5">
+      <p class="cta-text-large">Ready to experience the BelleAura difference?</p>
+      <a href="/book" class="btn btn-primary btn-large">Book Your Appointment <span aria-hidden="true">→</span></a>
+    </div>
+  </div>
+</section>

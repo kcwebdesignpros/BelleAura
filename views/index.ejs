@@ -1,0 +1,259 @@
+<!-- Hero Section — Split Layout: Content Left, Image Right -->
+<section class="hero">
+  <div class="hero-shape-1"></div>
+  <div class="hero-shape-2"></div>
+  <div class="hero-shape-3"></div>
+  <div class="container">
+    <div class="hero-grid">
+      <div class="hero-content">
+        <span class="hero-eyebrow">Welcome to BelleAura</span>
+        <h1 class="hero-title">
+          <span class="line-1">Look Good</span>
+          <span class="line-2">Feel <em>Amazing</em></span>
+        </h1>
+        <p class="hero-text">Premium beauty services for your hair, skin, nails, and overall well-being. Because you deserve the best version of yourself.</p>
+        <div class="hero-actions">
+          <a href="/book" class="btn btn-primary btn-lg">Book Appointment <span aria-hidden="true">&rarr;</span></a>
+          <a href="/services" class="btn btn-outline">Explore Services</a>
+        </div>
+        <div class="hero-stats">
+          <div class="hero-stat">
+            <span class="hero-stat-num">5+</span>
+            <span class="hero-stat-label">Years Experience</span>
+          </div>
+          <div class="hero-stat">
+            <span class="hero-stat-num">10K+</span>
+            <span class="hero-stat-label">Happy Clients</span>
+          </div>
+          <div class="hero-stat">
+            <span class="hero-stat-num">4.9</span>
+            <span class="hero-stat-label">Star Rating</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-visual">
+        <div class="hero-image-frame">
+          <img src="/images/hero.jpg" alt="Professional beauty stylist at BelleAura Beauty Salon in Kansas City" width="900" height="1100" fetchpriority="high" decoding="async">
+        </div>
+        <div class="hero-float-card hero-float-1">
+          <span class="hero-float-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 5.9 6.5.9-4.7 4.6 1.1 6.5L12 17.8 6.2 19.9l1.1-6.5L2.6 8.8l6.5-.9L12 2z"/></svg>
+          </span>
+          <div>
+            <strong>4.9 Rating</strong>
+            <span>127+ reviews</span>
+          </div>
+        </div>
+        <div class="hero-float-card hero-float-2">
+          <span class="hero-float-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+          </span>
+          <div>
+            <strong>10K+ Clients</strong>
+            <span>Trusted in KC</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Services Section -->
+<section class="services-section section-padding">
+  <div class="container">
+    <div class="section-header center">
+      <span class="section-eyebrow">Our Services</span>
+      <h2 class="section-title">Beauty Services We Offer</h2>
+      <p class="section-subtitle">From head to toe, we've got you covered. Explore our wide range of professional beauty and wellness services.</p>
+    </div>
+
+    <div class="services-grid">
+      <% services.forEach(function(service) { %>
+        <a href="/services/<%= service.slug %>" class="service-card" aria-label="<%= service.name %>">
+          <div class="service-icon">
+            <% if (service.icon === 'cut') { %>
+              <svg viewBox="0 0 48 48" fill="none"><circle cx="24" cy="18" r="10" stroke="currentColor" stroke-width="2"/><path d="M8 38c4-8 12-12 16-12s12 4 16 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+            <% } else if (service.icon === 'face') { %>
+              <svg viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="14" stroke="currentColor" stroke-width="2"/><circle cx="19" cy="22" r="1.5" fill="currentColor"/><circle cx="29" cy="22" r="1.5" fill="currentColor"/><path d="M20 30c2 2 6 2 8 0" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+            <% } else if (service.icon === 'nail') { %>
+              <svg viewBox="0 0 48 48" fill="none"><path d="M16 8c-4 0-8 4-8 8 0 8 8 24 16 24s16-16 16-24c0-4-4-8-8-8" stroke="currentColor" stroke-width="2"/><ellipse cx="24" cy="14" rx="6" ry="4" stroke="currentColor" stroke-width="2"/></svg>
+            <% } else if (service.icon === 'makeup') { %>
+              <svg viewBox="0 0 48 48" fill="none"><rect x="12" y="14" width="24" height="6" rx="3" stroke="currentColor" stroke-width="2"/><path d="M24 20v18" stroke="currentColor" stroke-width="2"/><path d="M18 38h12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+            <% } else if (service.icon === 'spa') { %>
+              <svg viewBox="0 0 48 48" fill="none"><path d="M24 8c-2 4-2 8 0 12M24 8c2 4 2 8 0 12M14 24c2-4 6-6 10-6s8 2 10 6c-4 8-10 12-14 12s-10-4-14-12z" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M14 40h20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+            <% } else if (service.icon === 'crown') { %>
+              <svg viewBox="0 0 48 48" fill="none"><path d="M8 32l4-16 8 8 8-12 8 12 8-8 4 16H8z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><circle cx="12" cy="16" r="2" fill="currentColor"/><circle cx="24" cy="12" r="2" fill="currentColor"/><circle cx="36" cy="16" r="2" fill="currentColor"/></svg>
+            <% } %>
+          </div>
+          <h3 class="service-name"><%= service.name %></h3>
+          <p class="service-desc"><%= service.shortDescription %></p>
+          <span class="service-link">Learn More &rarr;</span>
+        </a>
+      <% }); %>
+    </div>
+  </div>
+</section>
+
+<!-- About Preview Section -->
+<section class="about-preview section-padding">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-image-wrap">
+        <div class="about-image">
+          <img src="/images/salon-interior.jpg" alt="BelleAura Beauty Salon Interior in Kansas City" loading="lazy" width="600" height="700">
+        </div>
+        <div class="about-image-badge">
+          <span class="about-image-badge-num">10K+</span>
+          <span class="about-image-badge-label">Happy Clients</span>
+        </div>
+      </div>
+      <div class="about-content">
+        <span class="section-eyebrow">About Us</span>
+        <h2 class="section-title">More Than a Salon,<br>It's a Beauty Experience</h2>
+        <p class="about-text">At BelleAura, we believe beauty is more than just how you look. It's how you feel. Our team of skilled professionals is dedicated to providing personalized care, premium products, and a relaxing environment where you can unwind and be yourself.</p>
+
+        <ul class="about-features">
+          <li>
+            <span class="feature-icon">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            </span>
+            <div>
+              <strong>Experienced &amp; Friendly Team</strong>
+              <span>Skilled experts in every service</span>
+            </div>
+          </li>
+          <li>
+            <span class="feature-icon">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 7h-3V5.5C16 4.12 14.88 3 13.5 3S11 4.12 11 5.5V7H5c-1.1 0-2 .9-2 2v11c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V9c0-1.1-.9-2-2-2zm-6 0V5.5c0-.28.22-.5.5-.5s.5.22.5.5V7h-1z"/></svg>
+            </span>
+            <div>
+              <strong>Premium Products</strong>
+              <span>Safe, high-quality, trusted brands</span>
+            </div>
+          </li>
+          <li>
+            <span class="feature-icon">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+            </span>
+            <div>
+              <strong>Relaxing Atmosphere</strong>
+              <span>Your comfort is our priority</span>
+            </div>
+          </li>
+        </ul>
+
+        <a href="/about" class="btn btn-primary">Learn More <span aria-hidden="true">&rarr;</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Stats Section -->
+<section class="stats-section">
+  <div class="container">
+    <div class="stats-intro">
+      <span class="section-eyebrow light">Why Choose BelleAura</span>
+      <h2 class="section-title light">Beauty. Care. Confidence.</h2>
+      <p class="section-subtitle light">You're not just a visitor &mdash; we're your partner in care.</p>
+    </div>
+    <div class="stats-grid">
+      <div class="stat-item">
+        <span class="stat-number">5+</span>
+        <span class="stat-label">Years of Experience</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-number">10K+</span>
+        <span class="stat-label">Happy Clients</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-number">20+</span>
+        <span class="stat-label">Beauty Experts</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-number">100%</span>
+        <span class="stat-label">Satisfaction Guarantee</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Gallery Preview -->
+<section class="gallery-preview section-padding">
+  <div class="container">
+    <div class="section-header center">
+      <span class="section-eyebrow">Our Gallery</span>
+      <h2 class="section-title">A Glimpse of Our Work</h2>
+      <p class="section-subtitle">Real people. Real results. See how we help create every day.</p>
+    </div>
+
+    <div class="gallery-grid">
+      <div class="gallery-item">
+        <img src="/images/gallery-1.jpg" alt="Hair styling transformation Kansas City" loading="lazy" width="400" height="500">
+        <div class="gallery-overlay"><span>Hair Styling</span></div>
+      </div>
+      <div class="gallery-item">
+        <img src="/images/gallery-2.jpg" alt="Facial treatment results" loading="lazy" width="400" height="500">
+        <div class="gallery-overlay"><span>Facials</span></div>
+      </div>
+      <div class="gallery-item">
+        <img src="/images/gallery-3.jpg" alt="Nail art design" loading="lazy" width="400" height="500">
+        <div class="gallery-overlay"><span>Nail Art</span></div>
+      </div>
+      <div class="gallery-item">
+        <img src="/images/gallery-4.jpg" alt="Professional makeup" loading="lazy" width="400" height="500">
+        <div class="gallery-overlay"><span>Makeup</span></div>
+      </div>
+    </div>
+
+    <div class="text-center mt-4">
+      <a href="/gallery" class="btn btn-outline">View More Photos <span aria-hidden="true">&rarr;</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- Reviews Preview — Carousel -->
+<section class="reviews-preview section-padding" id="testimonials">
+  <div class="container">
+    <div class="section-header center">
+      <span class="section-eyebrow">Our Testimonials</span>
+      <h2 class="section-title">What Our Clients Say</h2>
+      <p class="section-subtitle">Real stories from real people who love BelleAura.</p>
+    </div>
+
+    <div class="testimonial-carousel" data-carousel>
+      <div class="carousel-stage">
+        <button class="carousel-arrow carousel-arrow--prev" type="button" data-carousel-prev aria-label="Show previous testimonials">
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M15 5l-7 7 7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+
+        <div class="testimonial-viewport" data-carousel-track tabindex="0" role="region" aria-label="Client testimonials carousel">
+          <% reviews.forEach(function(review) { %>
+            <article class="review-card testimonial-card">
+              <div class="review-stars" aria-label="<%= review.rating %> out of 5 stars">
+                <% for (let i = 0; i < review.rating; i++) { %>
+                  <span class="star" aria-hidden="true">&starf;</span>
+                <% } %>
+              </div>
+              <p class="review-text"><%= review.text %></p>
+              <div class="review-author">
+                <strong><%= review.name %></strong>
+                <span><%= review.location %> &bull; <%= review.service %></span>
+              </div>
+            </article>
+          <% }); %>
+        </div>
+
+        <button class="carousel-arrow carousel-arrow--next" type="button" data-carousel-next aria-label="Show next testimonials">
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+
+      <div class="carousel-dots" data-carousel-dots></div>
+    </div>
+
+    <div class="text-center mt-4">
+      <a href="/reviews" class="btn btn-outline">Read All Reviews <span aria-hidden="true">&rarr;</span></a>
+    </div>
+  </div>
+</section>

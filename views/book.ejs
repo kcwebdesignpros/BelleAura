@@ -1,0 +1,139 @@
+<!-- Page Hero -->
+<section class="page-hero">
+  <div class="container">
+    <span class="hero-eyebrow">Easy Booking</span>
+    <h1 class="page-title">Book Your Appointment</h1>
+    <p class="page-subtitle">Reserve your spot at BelleAura Beauty Salon Kansas City</p>
+  </div>
+</section>
+
+<!-- Booking Section -->
+<section class="booking-section section-padding">
+  <div class="container">
+    <div class="booking-grid">
+      <div class="booking-info">
+        <h2 class="section-title">Reserve Your Beauty Experience</h2>
+        <p>Booking online is quick and easy. Select your service, choose your preferred stylist, and pick the time that works best for your schedule.</p>
+
+        <div class="booking-features">
+          <div class="booking-feature">
+            <span class="feature-icon">✓</span>
+            <div>
+              <strong>Instant Confirmation</strong>
+              <p>Get immediate confirmation of your appointment</p>
+            </div>
+          </div>
+          <div class="booking-feature">
+            <span class="feature-icon">✓</span>
+            <div>
+              <strong>Free Reschedule</strong>
+              <p>Reschedule up to 24 hours before with no fees</p>
+            </div>
+          </div>
+          <div class="booking-feature">
+            <span class="feature-icon">✓</span>
+            <div>
+              <strong>Secure Booking</strong>
+              <p>Your information is always safe and private</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="booking-contact">
+          <h3>Prefer to Book by Phone?</h3>
+          <p>Call us directly at <a href="tel:+18165550123">(816) 555-0123</a> and our friendly team will help you find the perfect appointment time.</p>
+        </div>
+      </div>
+
+      <div class="booking-form-wrapper">
+        <h2 class="section-title">Book Online</h2>
+        <form class="booking-form" action="/book" method="POST" novalidate>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="firstName">First Name *</label>
+              <input type="text" id="firstName" name="firstName" required>
+            </div>
+            <div class="form-group">
+              <label for="lastName">Last Name *</label>
+              <input type="text" name="lastName" required>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="email">Email *</label>
+              <input type="email" name="email" required>
+            </div>
+            <div class="form-group">
+              <label for="phone">Phone *</label>
+              <input type="tel" name="phone" required>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="service">Service *</label>
+            <select name="service" required>
+              <option value="">Select a service</option>
+              <% services.forEach(function(s) { %>
+                <option value="<%= s.slug %>"><%= s.name %> - <%= s.pricing %></option>
+              <% }); %>
+            </select>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="date">Preferred Date *</label>
+              <input type="date" name="date" required>
+            </div>
+            <div class="form-group">
+              <label for="time">Preferred Time *</label>
+              <select name="time" required>
+                <option value="">Select time</option>
+                <option value="09:00">9:00 AM</option>
+                <option value="10:00">10:00 AM</option>
+                <option value="11:00">11:00 AM</option>
+                <option value="12:00">12:00 PM</option>
+                <option value="13:00">1:00 PM</option>
+                <option value="14:00">2:00 PM</option>
+                <option value="15:00">3:00 PM</option>
+                <option value="16:00">4:00 PM</option>
+                <option value="17:00">5:00 PM</option>
+                <option value="18:00">6:00 PM</option>
+                <option value="19:00">7:00 PM</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="stylist">Preferred Stylist (Optional)</label>
+            <select name="stylist">
+              <option value="">Any available stylist</option>
+              <option value="isabella">Isabella Martinez - Master Stylist</option>
+              <option value="olivia">Olivia Chen - Lead Esthetician</option>
+              <option value="sophia">Sophia Williams - Nail Artist</option>
+              <option value="ava">Ava Johnson - Makeup Artist</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="notes">Special Requests or Notes</label>
+            <textarea name="notes" rows="3" placeholder="Any allergies, preferences, or special requests..."></textarea>
+          </div>
+
+          <div class="form-checkbox">
+            <input type="checkbox" id="firstTime" name="firstTime">
+            <label for="firstTime">This is my first visit to BelleAura</label>
+          </div>
+
+          <div class="form-checkbox">
+            <input type="checkbox" id="consent" name="consent" required>
+            <label for="consent">I agree to the booking terms and cancellation policy</label>
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-large btn-block">Confirm Appointment <span aria-hidden="true">→</span></button>
+          <p class="form-note">We'll send a confirmation email within 1 hour during business hours.</p>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>

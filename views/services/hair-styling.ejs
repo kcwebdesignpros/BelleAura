@@ -1,0 +1,107 @@
+<section class="service-hero">
+  <div class="container">
+    <span class="hero-eyebrow">Our Service</span>
+    <h1 class="page-hero-title"><%= service.name %></h1>
+    <p class="page-hero-subtitle">Kansas City's premier destination for <%= service.name.toLowerCase() %></p>
+  </div>
+</section>
+
+<section class="service-content section-padding">
+  <div class="container">
+    <div class="service-grid">
+      <div class="service-image-wrapper">
+        <img src="<%= service.image %>" alt="<%= service.name %> at BelleAura Kansas City" loading="lazy">
+        <div class="service-badge">
+          <span class="service-price-badge"><%= service.pricing %></span>
+          <span class="service-duration-badge"><%= service.duration %></span>
+        </div>
+      </div>
+
+      <div class="service-info">
+        <span class="section-eyebrow">Premium Service</span>
+        <h2 class="section-title">What We Offer</h2>
+        <p class="service-full-description"><%= service.fullDescription %></p>
+
+        <h3 class="mt-4">Service Features</h3>
+        <ul class="service-features-list">
+          <% service.features.forEach(function(feature) { %>
+            <li>
+              <span class="feature-check" aria-hidden="true">✓</span>
+              <strong><%= feature %></strong>
+              <p>Professional <%= feature.toLowerCase() %> tailored to your preferences and needs by our Kansas City experts.</p>
+            </li>
+          <% }); %>
+        </ul>
+
+        <div class="service-cta">
+          <a href="/book" class="btn btn-primary btn-large">Book <%= service.name %> Now <span aria-hidden="true">→</span></a>
+          <a href="/pricing" class="btn btn-outline">View Pricing</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Why Choose Section -->
+    <div class="why-choose-service">
+      <h2 class="section-title center">Why Choose BelleAura for <%= service.name %></h2>
+      <div class="why-grid">
+        <div class="why-item">
+          <h3>Expert Specialists</h3>
+          <p>Our team includes certified specialists with years of advanced training specifically in <%= service.name.toLowerCase() %>.</p>
+        </div>
+        <div class="why-item">
+          <h3>Customized Approach</h3>
+          <p>Every session begins with a thorough consultation to understand your goals and create a personalized plan.</p>
+        </div>
+        <div class="why-item">
+          <h3>Premium Products</h3>
+          <p>We use only the highest quality professional products that are proven effective and safe for all skin and hair types.</p>
+        </div>
+        <div class="why-item">
+          <h3>Lasting Results</h3>
+          <p>Our techniques and products are chosen to deliver results that last, with proper care and maintenance guidance.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Process Section -->
+    <div class="service-process">
+      <h2 class="section-title center">Our Process</h2>
+      <div class="process-grid">
+        <div class="process-step">
+          <span class="process-number">01</span>
+          <h3>Consultation</h3>
+          <p>We discuss your goals, preferences, and any concerns to create a customized service plan.</p>
+        </div>
+        <div class="process-step">
+          <span class="process-number">02</span>
+          <h3>Preparation</h3>
+          <p>We prepare your hair/skin/nails using professional-grade products designed for optimal results.</p>
+        </div>
+        <div class="process-step">
+          <span class="process-number">03</span>
+          <h3>Service</h3>
+          <p>Our expert performs the service with meticulous attention to detail and your comfort.</p>
+        </div>
+        <div class="process-step">
+          <span class="process-number">04</span>
+          <h3>Aftercare</h3>
+          <p>We share personalized advice to maintain your beautiful results until your next visit.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Related Services -->
+    <div class="related-services">
+      <h2 class="section-title center">Explore Other Services</h2>
+      <div class="services-grid">
+        <% relatedServices.forEach(function(s) { %>
+          <a href="/services/<%= s.slug %>" class="service-card">
+            <h3 class="service-name"><%= s.name %></h3>
+            <p class="service-desc"><%= s.shortDescription %></p>
+            <span class="service-link">Learn More →</span>
+          </a>
+        <% }); %>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,11 @@
+<!-- JavaScript -->
+<script src="/js/main.js" defer></script>
+
+<!-- Smooth scroll polyfill -->
+<script>
+  if (!('scrollBehavior' in document.documentElement.style)) {
+    const script = document.createElement('script');
+    script.src = 'https://cdn.jsdelivr.net/npm/smoothscroll-polyfill@0.4.4/dist/smoothscroll.min.js';
+    document.head.appendChild(script);
+  }
+</script>

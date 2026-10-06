@@ -1,0 +1,33 @@
+# Dependencies
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Environment
+.env
+.env.local
+.env.production
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+
+# Logs
+logs/
+*.log
+
+# Cache
+.cache/
+dist/
+
+# Local tooling / agent workspace (large local artifacts, not part of the site)
+.workbuddy-ai/
+
+# Vercel
+.vercel

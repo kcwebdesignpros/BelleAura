@@ -1,0 +1,64 @@
+<!-- Page Hero -->
+<section class="page-hero">
+  <div class="container">
+    <span class="hero-eyebrow">Transparent Pricing</span>
+    <h1 class="page-title">Service Pricing</h1>
+    <p class="page-subtitle">Premium beauty services at honest, competitive prices</p>
+  </div>
+</section>
+
+<!-- Pricing Section -->
+<section class="pricing-section section-padding">
+  <div class="container">
+    <div class="section-header center">
+      <span class="section-eyebrow">Investment in You</span>
+      <h2 class="section-title">Our Service Pricing</h2>
+      <p class="section-subtitle">All prices are starting points. Final pricing depends on hair type, length, complexity, and add-ons.</p>
+    </div>
+
+    <div class="pricing-grid">
+      <% services.forEach(function(service) { %>
+        <div class="pricing-card">
+          <div class="pricing-header">
+            <h3><%= service.name %></h3>
+            <span class="pricing-starting"><%= service.pricing %></span>
+          </div>
+          <p class="pricing-duration">Duration: <%= service.duration %></p>
+          <ul class="pricing-features">
+            <% service.features.forEach(function(feature) { %>
+              <li><span class="check" aria-hidden="true">✓</span> <%= feature %></li>
+            <% }); %>
+          </ul>
+          <a href="/services/<%= service.slug %>" class="btn btn-outline btn-block">View Details</a>
+        </div>
+      <% }); %>
+    </div>
+
+    <!-- Pricing Notes -->
+    <div class="pricing-notes">
+      <h3>Good to Know</h3>
+      <div class="notes-grid">
+        <div class="note">
+          <h4>Consultations</h4>
+          <p>All new clients receive a complimentary consultation before their first service.</p>
+        </div>
+        <div class="note">
+          <h4>Packages &amp; Memberships</h4>
+          <p>Save more with our bundled packages and monthly membership plans. Ask about our loyalty rewards.</p>
+        </div>
+        <div class="note">
+          <h4>Group Bookings</h4>
+          <p>Bridal parties and special events receive special group rates. Contact us for custom packages.</p>
+        </div>
+        <div class="note">
+          <h4>Cancellation Policy</h4>
+          <p>24-hour notice required for cancellations. Less than 24 hours may incur a 50% fee.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="text-center mt-5">
+      <a href="/book" class="btn btn-primary btn-large">Book Your Appointment <span aria-hidden="true">→</span></a>
+    </div>
+  </div>
+</section>

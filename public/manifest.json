@@ -1,0 +1,16 @@
+{
+  "name": "BelleAura Beauty Salon",
+  "short_name": "BelleAura",
+  "description": "Premium beauty salon in Kansas City",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#fdf8f6",
+  "theme_color": "#d4a5a5",
+  "icons": [
+    {
+      "src": "/images/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}

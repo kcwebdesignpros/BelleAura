@@ -1,0 +1,98 @@
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+<title><%= typeof title !== 'undefined' ? title : site.name %></title>
+<meta name="description" content="<%= typeof description !== 'undefined' ? description : site.description %>">
+<meta name="keywords" content="beauty salon Kansas City, hair styling KC, facials Kansas City, nail care, makeup artist, spa treatments, BelleAura">
+<meta name="author" content="<%= site.name %>">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="<%= site.url %><%= typeof canonical !== 'undefined' ? canonical : '/' %>">
+
+<!-- Favicon (transparent PNG) -->
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16.png">
+<link rel="icon" type="image/png" href="/images/favicon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+<!-- Preconnect -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<!-- Stylesheet -->
+<link rel="stylesheet" href="/css/style.css">
+
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="<%= typeof title !== 'undefined' ? title : site.name %>">
+<meta property="og:description" content="<%= typeof description !== 'undefined' ? description : site.description %>">
+<meta property="og:url" content="<%= site.url %><%= typeof canonical !== 'undefined' ? canonical : '/' %>">
+<meta property="og:site_name" content="<%= site.name %>">
+<meta property="og:image" content="<%= site.url %><%= site.ogImage %>">
+<meta property="og:locale" content="en_US">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="<%= typeof title !== 'undefined' ? title : site.name %>">
+<meta name="twitter:description" content="<%= typeof description !== 'undefined' ? description : site.description %>">
+<meta name="twitter:image" content="<%= site.url %><%= site.ogImage %>">
+
+<!-- Local Business Schema -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BeautySalon",
+  "name": "<%= site.name %>",
+  "image": "<%= site.url %><%= site.ogImage %>",
+  "description": "<%= site.description %>",
+  "url": "<%= site.url %>",
+  "telephone": "<%= site.phone %>",
+  "email": "<%= site.email %>",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "4820 JCT Country Club Road",
+    "addressLocality": "Kansas City",
+    "addressRegion": "MO",
+    "postalCode": "64112",
+    "addressCountry": "US"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": "39.0067",
+    "longitude": "-94.5928"
+  },
+  "openingHoursSpecification": [
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],
+      "opens": "09:00",
+      "closes": "20:00"
+    },
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": "Sunday",
+      "opens": "10:00",
+      "closes": "18:00"
+    }
+  ],
+  "priceRange": "$$",
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.9",
+    "reviewCount": "127"
+  }
+}
+</script>
+
+<!-- Google Analytics placeholder (replace with your ID) -->
+<% if (typeof gaId !== 'undefined' && gaId) { %>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=<%= gaId %>"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', '<%= gaId %>');
+</script>
+<% } %>

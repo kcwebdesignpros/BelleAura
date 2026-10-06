@@ -1,0 +1,24 @@
+<header class="site-header" id="site-header">
+  <div class="container">
+    <div class="header-inner">
+      <a href="/" class="logo" aria-label="BelleAura Beauty Salon Home">
+        <img src="/images/logo.png" alt="BelleAura Beauty Salon" class="logo-img" width="183" height="44" fetchpriority="high">
+      </a>
+
+      <nav class="main-nav" aria-label="Primary navigation">
+        <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+        <ul class="nav-list" id="nav-list">
+          <li><a href="/" class="<%= typeof pageClass !== 'undefined' && pageClass === 'home' ? 'active' : '' %>">Home</a></li>
+          <li><a href="/about" class="<%= typeof pageClass !== 'undefined' && pageClass === 'about' ? 'active' : '' %>">About</a></li>
+          <li><a href="/services" class="<%= typeof pageClass !== 'undefined' && (pageClass === 'services' || pageClass === 'service-detail') ? 'active' : '' %>">Services</a></li>
+          <li><a href="/gallery" class="<%= typeof pageClass !== 'undefined' && pageClass === 'gallery' ? 'active' : '' %>">Gallery</a></li>
+          <li><a href="/reviews" class="<%= typeof pageClass !== 'undefined' && pageClass === 'reviews' ? 'active' : '' %>">Reviews</a></li>
+          <li><a href="/contact" class="<%= typeof pageClass !== 'undefined' && pageClass === 'contact' ? 'active' : '' %>">Contact</a></li>
+          <li><a href="/book" class="btn btn-primary btn-sm nav-cta">Book Appointment</a></li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</header>
